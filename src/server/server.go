@@ -82,8 +82,8 @@ func main() {
 	} else {
 		if *concurrent > 1 {
 			for i := 0; i < *concurrent; i++ {
-				*dst = *dst + ":" + strconv.Itoa(10000 + i)
-				go play(*file, *dst, *dur)
+				outputAddr = *dst + ":" + strconv.Itoa(10000 + i)
+				go play(*file, outputAddr, *dur)
 			}
 		}
 		play(*file, *monitor, *dur)
