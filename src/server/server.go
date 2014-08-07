@@ -13,6 +13,7 @@ import (
 	"net"
 	"os"
 	"runtime"
+	"strconv"
 )
 
 const BUF_SIZE = 7 * 188 * 256
@@ -69,7 +70,7 @@ func forward(src string, dst string) {
 func main() {
 	source := flag.String("s", "", "stream from udp source")
 	file := flag.String("f", "", "ts file to delivery")
-	dst := flag.String("o", "127.0.0.1:3001", "output udp to")
+	dst := flag.String("o", "127.0.0.1", "output udp to")
 	threadNum := flag.Int("t", 1, "thread number")
 	dur := flag.Int("d", 0, "max play duration")
 	concurrent := flag.Int("c", 1, "concurrent ")
@@ -81,6 +82,7 @@ func main() {
 	} else {
 		if *concurrent > 1 {
 			for i := 0; i < *concurrent; i++ {
+				*dst = *dst + ":" + strconv.Itoa(10000 + i)
 				go play(*file, *dst, *dur)
 			}
 		}
