@@ -82,7 +82,7 @@ func main() {
 	} else {
 		if *concurrent > 1 {
 			for i := 0; i < *concurrent; i++ {
-				outputAddr = *dst + ":" + strconv.Itoa(10000 + i)
+				outputAddr := *dst + ":" + strconv.Itoa(10000+i)
 				go play(*file, outputAddr, *dur)
 			}
 		}
